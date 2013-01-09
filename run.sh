@@ -5,4 +5,15 @@ echo "set completion-prefix-display-length 2" >> ~/.inputrc
 source .inputrc
 
 # ack - the better grep
-curl http://betterthangrep.com/ack-standalone > /usr/local/bin/ack && chmod 0755 !#:3
+PATHDIRS="
+$HOME/bin
+/usr/local/bin
+/usr/bin"
+for dir in $PATHDIRS
+do
+    if [ echo $PATH | grep $dir; ]; then
+        curl http://betterthangrep.com/ack-standalone > $dir/ack && chmod 0755 $dir/ack
+        break
+    fi
+done
+
