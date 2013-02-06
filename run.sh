@@ -1,8 +1,30 @@
+#!/bin/sh
+
 # case insensitive resource match
-echo "set completion-ignore-case On" >> ~/.inputrc
-echo "set show-all-if-ambiguous on" >> ~/.inputrc
-echo "set completion-prefix-display-length 2" >> ~/.inputrc
-source ~/.inputrc
+inputrc=~/.inputrc
+
+INPUTRCS="
+/etc/inputrc"
+for rc in $INPUTRCS
+do
+    if [ -f $rc ]; then
+        $inputrc=$rc;
+        break;
+    fi
+done
+
+INPUTRULES="
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set completion-prefix-display-length 2"
+for rule in $INPUTRULES
+do
+    if [ ! `echo $inputrc | grep $rule` ]; then
+        echo "$rule" >> $inputrc;
+    fi
+done
+
+source $inputrc
 
 echo "alias ll='ls -alr'" >> ~/.bash_profile
 echo "alias ..='cd ..'" >> ~/.bash_profile
