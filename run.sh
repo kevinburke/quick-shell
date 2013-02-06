@@ -7,7 +7,6 @@ source ~/.inputrc
 echo "alias ll='ls -alr'" >> ~/.bash_profile
 echo "alias ..='cd ..'" >> ~/.bash_profile
 echo "alias ..2='cd ../..'" >> ~/.bash_profile
-source ~/.bash_profile
 
 # ack - the better grep
 PATHDIRS="
@@ -17,8 +16,10 @@ $HOME/bin
 for dir in $PATHDIRS
 do
     if [ `echo $PATH | grep $dir` ]; then
+        mkdir -p $dir
         curl http://betterthangrep.com/ack-standalone > $dir/ack && chmod 0755 $dir/ack
         break
     fi
 done
 
+source ~/.bash_profile
