@@ -8,7 +8,7 @@ INPUTRCS="
 for rc in $INPUTRCS
 do
     if [ -f $rc ]; then
-        $inputrc=$rc;
+        inputrc=$rc;
         break;
     fi
 done
@@ -29,6 +29,7 @@ source $inputrc
 echo "alias ll='ls -alr'" >> ~/.bash_profile
 echo "alias ..='cd ..'" >> ~/.bash_profile
 echo "alias ..2='cd ../..'" >> ~/.bash_profile
+echo "alias ..3='cd ../..'" >> ~/.bash_profile
 
 # ack - the better grep
 PATHDIRS="
