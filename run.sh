@@ -19,7 +19,8 @@ set show-all-if-ambiguous on
 set completion-prefix-display-length 2"
 for rule in "$INPUTRULES"
 do
-    if [ ! $(echo $inputrc | grep $rule) ]; then
+    val=$(cat $inputrc | grep $rule)
+    if [ $? -gt 0  ]; then
         echo "$rule" >> $inputrc;
     fi
 done
