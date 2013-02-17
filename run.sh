@@ -7,7 +7,7 @@ INPUTRCS="
 /etc/inputrc"
 for rc in $INPUTRCS
 do
-    if [ -f $rc && -w $rc ]; then
+    if [ -f $rc -a -w $rc ]; then
         inputrc=$rc;
         break;
     fi
