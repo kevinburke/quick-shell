@@ -13,6 +13,10 @@ do
     fi
 done
 
+if [ -f $inputrc ]; then
+    touch $inputrc;
+fi
+
 INPUTRULES="
 set completion-ignore-case on
 set show-all-if-ambiguous on
