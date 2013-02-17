@@ -17,13 +17,18 @@ INPUTRULES="
 set completion-ignore-case on
 set show-all-if-ambiguous on
 set completion-prefix-display-length 2"
-for rule in "$INPUTRULES"
+oldIFS=$IFS
+IFS=$'\n'
+for rule in $INPUTRULES
 do
-    val=$(cat $inputrc | grep $rule)
+    echo $rule;
+    val=$(grep -i $rule $inputrc)
     if [ $? -gt 0  ]; then
-        echo "$rule" >> $inputrc;
+        #echo "$rule" >> $inputrc;
+        echo "did not find match";
     fi
 done
+IFS=$oldIFS
 
 source $inputrc
 
