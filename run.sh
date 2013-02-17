@@ -21,21 +21,30 @@ oldIFS=$IFS
 IFS=$'\n'
 for rule in $INPUTRULES
 do
-    echo $rule;
     val=$(grep -i $rule $inputrc)
     if [ $? -gt 0  ]; then
-        #echo "$rule" >> $inputrc;
-        echo "did not find match";
+        echo "$rule" >> $inputrc;
     fi
 done
+
+bind -f $inputrc
+
+# copy some aliases to bash_profile
+ALIASES="
+alias ll='ls -alr'
+alias ..='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../..'"
+for full_alias in $ALIASES
+do
+    alias=$(echo $full_alias | cut -d'=' -f1)
+    val=$(grep -i $alias ~/.bash_profile)
+    if [ $? -gt 0  ]; then
+        echo "$full_alias" >> ~/.bash_profile;
+    fi
+done
+
 IFS=$oldIFS
-
-source $inputrc
-
-echo "alias ll='ls -alr'" >> ~/.bash_profile
-echo "alias ..='cd ..'" >> ~/.bash_profile
-echo "alias ..2='cd ../..'" >> ~/.bash_profile
-echo "alias ..3='cd ../..'" >> ~/.bash_profile
 
 # ack - the better grep
 PATHDIRS="
